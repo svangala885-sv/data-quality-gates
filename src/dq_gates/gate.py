@@ -19,7 +19,7 @@ log = logging.getLogger(__name__)
 class QualityGateFailed(RuntimeError):
     """Raised when one or more error-severity rules fail."""
 
-    def __init__(self, result: "GateResult"):
+    def __init__(self, result: GateResult):
         self.result = result
         failed = ", ".join(r.name for r in result.blocking_failures)
         super().__init__(f"quality gate '{result.dataset}' failed: {failed}")
@@ -65,7 +65,7 @@ class QualityGate:
         self._rules = [build_rule(spec) for spec in rule_specs]
 
     @classmethod
-    def from_yaml(cls, path: str | Path) -> "QualityGate":
+    def from_yaml(cls, path: str | Path) -> QualityGate:
         config = yaml.safe_load(Path(path).read_text())
         return cls(dataset=config["dataset"], rule_specs=config["rules"])
 
