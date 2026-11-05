@@ -1,5 +1,7 @@
 # data-quality-gates
 
+[![ci](https://github.com/svangala885-sv/data-quality-gates/actions/workflows/ci.yml/badge.svg)](https://github.com/svangala885-sv/data-quality-gates/actions/workflows/ci.yml) ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg) ![Data: synthetic](https://img.shields.io/badge/data-synthetic-lightgrey.svg)
+
 Config-driven data quality gates and post-load reconciliation for batch pipelines. A gate validates a staged extract against rules written in YAML and **stops the load** when an error-level rule fails, so bad data never reaches the warehouse or a dashboard. Failures produce a short incident summary that says what broke, how many rows, sample values and the most likely cause.
 
 > **Portfolio note.** This is an independently written, representative project built with synthetic data. It is not code from, and does not describe the internal systems of, any employer or client.
