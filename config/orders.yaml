@@ -1,0 +1,11 @@
+# Quality gate for the synthetic orders extract.
+dataset: orders
+rules:
+  - {name: order_id_not_null, type: not_null, column: order_id}
+  - {name: order_id_unique, type: unique, column: order_id}
+  - {name: customer_id_not_null, type: not_null, column: customer_id}
+  - {name: amount_non_negative, type: in_range, column: amount_usd, min: 0, max: 100000}
+  - {name: status_valid, type: accepted_values, column: status, values: [PLACED, SHIPPED, DELIVERED, CANCELLED]}
+  - {name: email_format, type: regex, column: email, pattern: '[^@\s]+@[^@\s]+\.[a-z]{2,}', severity: warn}
+  - {name: minimum_volume, type: row_count, min: 100}
+  - {name: orders_fresh, type: freshness, column: order_ts, max_age_hours: 72, as_of: "2026-01-08T00:00:00"}
